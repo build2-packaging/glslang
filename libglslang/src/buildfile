@@ -106,6 +106,15 @@ if $windows
   obj{glslang/ResourceLimits/resource_limits_c}: \
     cxx.poptions += -D_CRT_SECURE_NO_WARNINGS
 
+# A C++26 configuration (for example config.cxx.std=latest, which overrides
+# the standard selected in root.build) makes Clang reject the arithmetic
+# between different enumeration types (P2864) in the member hashing. GCC
+# accepts it.
+#
+if ($cxx.id.type == 'clang')
+  obj{glslang/MachineIndependent/ParseHelper}: \
+    cxx.coptions += -Wno-enum-enum-conversion
+
 # Bison output triggers this on GCC/Clang. Upstream disables it for that TU.
 #
 if ($cxx.id != 'msvc')
