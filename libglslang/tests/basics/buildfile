@@ -1,6 +1,15 @@
 import libs = libglslang%lib{glslang}
 import libs += libglslang%lib{glslang-default-resource-limits}
 
+# With config.libglslang.opt (visible when testing as part of the libglslang
+# build), also exercise the SPIRV-Tools optimizer and SpirvTools*() functions.
+#
+if ($defined(config.libglslang.opt) && $config.libglslang.opt)
+{
+  import libs += libspirv-tools%lib{SPIRV-Tools}
+  cxx.poptions += -DENABLE_OPT=1
+}
+
 exe{driver}: {hxx cxx}{**} $libs
 
 if ($cxx.class == 'msvc')

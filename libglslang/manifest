@@ -17,3 +17,6 @@ package-email: packaging@build2.org ; Mailing list.
 requires: c++17
 depends: * build2 >= 0.18.0
 depends: * bpkg >= 0.18.0
+depends: libspirv-tools ^1.4.357 ? ($config.libglslang.opt)
+
+opt-build-config: config.libglslang.opt=true ; With the SPIRV-Tools optimizer.

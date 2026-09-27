@@ -2,6 +2,18 @@ intf_libs = # Interface dependencies.
 impl_libs = # Implementation dependencies.
 #import xxxx_libs += libhello%lib{hello}
 
+opt = $config.libglslang.opt
+
+# The optimizer is used by SPIRV/SpvTools.cpp and GlslangToSpv.cpp. Consumers
+# that call the SpirvTools*() functions define ENABLE_OPT and use
+# libspirv-tools themselves, as with upstream.
+#
+if $opt
+{
+  import impl_libs += libspirv-tools%lib{SPIRV-Tools}
+  import impl_libs += libspirv-tools%liba{SPIRV-Tools-opt}
+}
+
 windows = ($cxx.target.class == 'windows')
 macos   = ($cxx.target.class == 'macos')
 bsd     = ($cxx.target.class == 'bsd')
@@ -59,9 +71,9 @@ cxx.poptions =+ "-I$out_pfx_src" "-I$src_pfx_src" \
                 "-I$out_pfx_inc" "-I$src_pfx_inc"
 
 # Match upstream CMake add_compile_definitions() in the project root
-# CMakeLists.txt. ENABLE_OPT is off because SPIRV-Tools is not packaged.
+# CMakeLists.txt.
 #
-cxx.poptions += -DENABLE_SPIRV -DENABLE_HLSL -DENABLE_OPT=0
+cxx.poptions += -DENABLE_SPIRV -DENABLE_HLSL -DENABLE_OPT=($opt ? 1 : 0)
 
 if $windows
   cxx.poptions += -DGLSLANG_OSINCLUDE_WIN32

@@ -3,6 +3,12 @@
 #include <glslang/SPIRV/GlslangToSpv.h>
 #include <glslang/build_info.h>
 
+#if ENABLE_OPT
+#  include <string>
+#  include <sstream>
+#  include <glslang/SPIRV/SpvTools.h>
+#endif
+
 #undef NDEBUG
 #include <cassert>
 #include <vector>
@@ -43,6 +49,19 @@ int main ()
   std::vector<unsigned int> spirv;
   glslang::GlslangToSpv (*program.getIntermediate (EShLangVertex), spirv);
   assert (!spirv.empty ());
+
+#if ENABLE_OPT
+  glslang::SpvOptions options;
+  options.disableOptimizer = false;
+
+  std::vector<unsigned int> opt;
+  glslang::GlslangToSpv (*program.getIntermediate (EShLangVertex), opt, &options);
+  assert (!opt.empty ());
+
+  std::ostringstream os;
+  glslang::SpirvToolsDisassemble (os, opt);
+  assert (os.str ().find ("OpEntryPoint") != std::string::npos);
+#endif
 
   glslang::FinalizeProcess ();
 }

@@ -16,6 +16,12 @@ cxx.std = ($cxx.id.type == 'clang' ? 17 : latest)
 using cxx
 using in
 
+# Build with the SPIRV-Tools optimizer (upstream's ENABLE_OPT option). This
+# enables the SpirvTools*() functions (SPIRV/SpvTools.h) and optimization in
+# GlslangToSpv(), and adds a dependency on libspirv-tools.
+#
+config [bool] config.libglslang.opt ?= false
+
 hxx{*}: extension = h
 cxx{*}: extension = cpp
 

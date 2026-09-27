@@ -53,9 +53,32 @@ Public headers install under `include/glslang/`. Typical includes:
 
 ## Configuration variables
 
-This package has no configuration variables.
+This package provides the following configuration variables:
+
+```
+[bool] config.libglslang.opt ?= false
+```
+
+`config.libglslang.opt` builds the library with the SPIRV-Tools optimizer
+(upstream's `ENABLE_OPT` option) and adds a dependency on `libspirv-tools`.
+It enables optimization in `GlslangToSpv()` and the `SpirvTools*()`
+functions declared in `<glslang/SPIRV/SpvTools.h>`. As with upstream, a
+consumer that calls those functions defines `ENABLE_OPT=1` and uses
+`libspirv-tools` itself. A dependent package can require it:
+
+```
+depends:
+\
+libglslang ^16.5.0
+{
+  require
+  {
+    config.libglslang.opt = true
+  }
+}
+\
+```
 
 HLSL support is compiled in, matching upstream's current default. The HLSL
-front-end is deprecated upstream. SPIRV-Tools optimization (`ENABLE_OPT`) is
-off because there is no build2 SPIRV-Tools package. The library is compiled
-with RTTI and exceptions disabled, matching upstream.
+front-end is deprecated upstream. The library is compiled with RTTI and
+exceptions disabled, matching upstream.
