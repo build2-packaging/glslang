@@ -9,10 +9,7 @@ opt = $config.libglslang.opt
 # libspirv-tools themselves, as with upstream.
 #
 if $opt
-{
-  import impl_libs += libspirv-tools%lib{SPIRV-Tools}
-  import impl_libs += libspirv-tools%liba{SPIRV-Tools-opt}
-}
+  import impl_libs += libspirv-tools%lib{SPIRV-Tools-opt}
 
 windows = ($cxx.target.class == 'windows')
 macos   = ($cxx.target.class == 'macos')
