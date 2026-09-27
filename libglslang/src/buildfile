@@ -47,7 +47,7 @@ lib{glslang}: cxx{glslang/OSDependent/Unix/ossource}: include = (!$windows)
 #
 lib{glslang-default-resource-limits}: $pub/{$pub_hdrs}
 lib{glslang-default-resource-limits}: {hxx cxx}{glslang/ResourceLimits/**} \
-                                      $impl_libs $intf_libs
+                                      $intf_libs
 
 # Upstream's SPIRV CMake target is a stub (glslang/stub.cpp) that re-exports
 # glslang. SPIR-V sources are compiled into lib{glslang}. The stub exports
