@@ -135,6 +135,12 @@ if ($cxx.id == 'gcc')
   # is misread as an oversized memmove into a smaller destination.
   #
   obj{SPIRV/GlslangToSpv}: cxx.coptions += -Wno-stringop-overflow
+
+  # GCC 16 -O3 false positive: vector<bool>::push_back() in
+  # Instruction::addIdOperand() (spvIR.h, inlined into SpvPostProcess.cpp)
+  # is misread as an oversized memcpy from a smaller source.
+  #
+  obj{SPIRV/SpvPostProcess}: cxx.coptions += -Wno-stringop-overread
 }
 
 if ($cxx.id == 'msvc')
