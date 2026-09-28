@@ -18,5 +18,6 @@ requires: c++17
 depends: * build2 >= 0.18.0
 depends: * bpkg >= 0.18.0
 depends: libspirv-tools ^1.4.357+1 ? ($config.libglslang.opt)
+build-exclude: *-msvc_14** ; Visual Studio 2015 does not support C++17.
 
 opt-build-config: config.libglslang.opt=true ; With the SPIRV-Tools optimizer.

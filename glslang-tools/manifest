@@ -18,3 +18,4 @@ requires: c++17
 depends: * build2 >= 0.18.0
 depends: * bpkg >= 0.18.0
 depends: libglslang == $
+build-exclude: *-msvc_14** ; Visual Studio 2015 does not support C++17.
