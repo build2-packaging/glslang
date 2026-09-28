@@ -1,0 +1,9 @@
+: 1
+name: glslang-tools
+version: 16.5.0+1
+language: c++
+project: glslang
+summary: GLSL and ESSL compiler front-end command line tool
+license: BSD-3-Clause AND BSD-2-Clause AND MIT AND Apache-2.0 AND\
+ GPL-3.0-or-later WITH Bison-exception-2.2 AND LicenseRef-AML-glslang AND\
+ LicenseRef-MIT-Khronos-old
