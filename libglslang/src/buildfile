@@ -153,6 +153,11 @@ if ($cxx.id == 'msvc')
   obj{glslang/MachineIndependent/ParseHelper}: cxx.coptions += /wd4244
   obj{glslang/MachineIndependent/SymbolTable}: cxx.coptions += /wd4267
   obj{SPIRV/GlslangToSpv}: cxx.coptions += /wd4267
+
+  # std::size() of small fixed extension arrays passed as the int extension
+  # count (older MSVC only).
+  #
+  obj{glslang/MachineIndependent/Versions}: cxx.coptions += /wd4267
 }
 
 if (!$windows)
