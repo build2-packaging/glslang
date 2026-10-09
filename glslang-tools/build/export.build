@@ -1,6 +1,7 @@
 $out_root/
 {
   include src/
+  include src/bin/
 }
 
 export $out_root/src/bin/$import.target
