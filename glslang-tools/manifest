@@ -1,6 +1,6 @@
 : 1
 name: glslang-tools
-version: 16.5.0+1
+version: 16.5.0+2
 language: c++
 project: glslang
 summary: GLSL and ESSL compiler front-end command line tool

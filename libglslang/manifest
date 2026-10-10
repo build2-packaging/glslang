@@ -1,6 +1,6 @@
 : 1
 name: libglslang
-version: 16.5.0+1
+version: 16.5.0+2
 language: c++
 project: glslang
 summary: GLSL and ESSL compiler front-end and SPIR-V generator C++ library
